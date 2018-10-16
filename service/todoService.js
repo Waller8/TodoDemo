@@ -47,7 +47,7 @@ async function updateTodo(id, todo) {
     let result = await Todo.updateOne({_id: id}, todo);
 
     if (result.n !== 1) {
-        throw Error(`删除ID为${id}的数据发生错误`)    // `` 这是原样字符串
+        throw Error(`更新ID为${id}的数据发生错误`)    // `` 这是原样字符串
     }
     return result;
 }
@@ -71,7 +71,7 @@ async function findAll() {
  */
 async function isExistById(id) {
     let result = await Todo.findOne({_id: id});
-    if (result) {
+    if (!result) {
         throw Error(`ID为${id}的数据不存在`)
     }
 }
