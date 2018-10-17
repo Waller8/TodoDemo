@@ -11,11 +11,13 @@ router.post("/", async (request, response) => {
     //获取请求的数据
     let body = request.body;
     let result = await todoService.addTodo(body);
-    response.send({
-        code: 1,
-        msg: "操作成功",
-        data: result
-    })
+
+    response.success(result)
+    // response.send({
+    //     code: 1,
+    //     msg: "操作成功",
+    //     data: result
+    // })
 });
 
 /**
@@ -25,12 +27,14 @@ router.post("/", async (request, response) => {
 router.delete("/:id", async (request, response) => {
     //获取路径中的参数
     let id = request.params.id;
-    let result = await todoService.deleteTodo(id);
-    response.send({
-        code: 1,
-        msg: "操作成功",
-        data: result
-    })
+    await todoService.deleteTodo(id);
+
+    response.success()
+    // response.send({
+    //     code: 1,
+    //     msg: "操作成功",
+    //     data: result
+    // })
 });
 
 /**
@@ -40,22 +44,24 @@ router.put("/:id", async (request, response) => {
     //获取路径中的参数
     let id = request.params.id;
     let body = request.body;
-    let result = await todoService.updateTodo(id, body);
-    response.send({
-        code: 1,
-        msg: "操作成功",
-        data: result
-    })
+    await todoService.updateTodo(id, body);
+    response.success()
+    // response.send({
+    //     code: 1,
+    //     msg: "操作成功",
+    //     data: result
+    // })
 });
 
 router.get("/", async (request, response) => {
     //获取请求的数据
     let result = await todoService.findAll();
-    response.send({
-        code: 1,
-        msg: "操作成功",
-        data: result
-    })
+    response.success(result)
+    // response.send({
+    //     code: 1,
+    //     msg: "操作成功",
+    //     data: result
+    // })
 });
 
 

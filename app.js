@@ -4,6 +4,7 @@ const express = require("express");
 const morgan = require("morgan");
 let todoRouter = require("./router/todoRouter");
 require("./db");
+let config = require("./config");
 let app = express();
 
 //使用日志功能
@@ -13,15 +14,21 @@ app.use(morgan("combined"));
 app.use(express.json());
 //挂载自定义router
 app.use("/todo", todoRouter);
+// 使用自定义的加强response的中间件
+app.use(require("./middleware/response_md"));
 
 
 //处理全局中间件
 app.use((err, request, response, next) => {
-    response.send({
-        code: -1,
-        msg: "操作失败",
-        data: err.toString()
-    })
+
+    //写出失败的响应
+    response.fail(err)
+
+    // response.send({
+    //     code: -1,
+    //     msg: "操作失败",
+    //     data: err.toString()
+    // })
 });
 
-app.listen(8000);
+app.listen(config.port);
