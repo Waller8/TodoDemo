@@ -23,7 +23,7 @@ async function addTodo(todo) {
  * @returns {Promise<*>}
  *  delete  删除
  */
-//dedlete 请求
+//delete 请求
 async function deleteTodo(id) {
 //根据id查找数据是否存在
     await   isExistById(id);
@@ -32,7 +32,6 @@ async function deleteTodo(id) {
     if (result.n !== 1) {
         throw Error(`删除ID为${id}的数据发生错误`)    // `` 这是原样字符串
     }
-    return result;
 }
 
 /***
@@ -49,7 +48,7 @@ async function updateTodo(id, todo) {
     if (result.n !== 1) {
         throw Error(`更新ID为${id}的数据发生错误`)    // `` 这是原样字符串
     }
-    return result;
+
 }
 
 /**

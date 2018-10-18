@@ -9,13 +9,12 @@ let app = express();
 
 //使用日志功能
 app.use(morgan("combined"));
-
 //解析json格式的数据
 app.use(express.json());
-//挂载自定义router
-app.use("/todo", todoRouter);
 // 使用自定义的加强response的中间件
 app.use(require("./middleware/response_md"));
+//挂载自定义router
+app.use("/todo", todoRouter);
 
 
 //处理全局中间件
@@ -24,11 +23,6 @@ app.use((err, request, response, next) => {
     //写出失败的响应
     response.fail(err)
 
-    // response.send({
-    //     code: -1,
-    //     msg: "操作失败",
-    //     data: err.toString()
-    // })
 });
 
 app.listen(config.port);

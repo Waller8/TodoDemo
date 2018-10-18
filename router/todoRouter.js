@@ -11,6 +11,7 @@ router.post("/", async (request, response) => {
     //获取请求的数据
     let body = request.body;
     let result = await todoService.addTodo(body);
+    console.log(result);
 
     response.success(result)
     // response.send({
